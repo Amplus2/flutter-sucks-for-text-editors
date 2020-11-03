@@ -29,8 +29,15 @@ class _ScriptPageState extends State<ScriptPage> {
           fontFamily: Config.fonts.first,
           fontFamilyFallback: Config.fonts,
           fontSize: Config.fontSize,
+          color: Color(Config.foregroundColor),
         ),
       ));
-    return Scaffold(body: Column(children: buffer));
+    return Scaffold(
+      backgroundColor: Color(Config.backgroundColor),
+      body: Column(
+        children: buffer,
+        crossAxisAlignment: CrossAxisAlignment.start,
+      ),
+    );
   }
 }
