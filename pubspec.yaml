@@ -23,10 +23,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  args: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  pedantic: any
 
 flutter:
 

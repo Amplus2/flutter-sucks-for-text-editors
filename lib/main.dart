@@ -1,8 +1,18 @@
 import 'package:adscriptum/buffer.dart';
+import 'package:args/args.dart';
 import 'package:flutter/material.dart';
 import 'package:adscriptum/config.dart' as Config;
 
-void main() {
+void main(final List<String> argv) {
+  final argParser = ArgParser()
+    ..addOption('config', abbr: 'C')
+    ..addOption('command', abbr: 'c');
+  final args = argParser.parse(argv);
+  for (final option in args.options) {
+    if (option == 'config')
+      Config.file = argParser.options['config'].getOrDefault('WTFHAPPENED');
+    else if (option == 'command') ; //TODO: run command
+  }
   runApp(MaterialApp(title: 'Adscriptum', home: ScriptPage()));
 }
 
