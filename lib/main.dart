@@ -1,14 +1,13 @@
+import 'package:adscriptum/buffer.dart';
 import 'package:flutter/material.dart';
 import 'package:adscriptum/config.dart' as Config;
 
 void main() {
-  runApp(MaterialApp(home: ScriptPage()));
+  runApp(MaterialApp(title: 'Adscriptum', home: ScriptPage()));
 }
 
 class ScriptPage extends StatefulWidget {
-  ScriptPage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  ScriptPage({Key key}) : super(key: key);
 
   @override
   _ScriptPageState createState() => _ScriptPageState();
@@ -17,12 +16,12 @@ class ScriptPage extends StatefulWidget {
 class _ScriptPageState extends State<ScriptPage> {
   //currently this is just a single-buffer editor
   //TODO: change that
-  List<String> _buffer = ['hello', 'this', 'is', 'a', 'test'];
+  Buffer _buffer = Buffer(['hello', 'this', 'is', 'a', 'test']);
 
   @override
   Widget build(BuildContext context) {
     final buffer = <Widget>[];
-    for (final line in _buffer)
+    for (final line in _buffer.buffer)
       buffer.add(Text(
         line,
         style: TextStyle(
