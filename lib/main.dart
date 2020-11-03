@@ -2,6 +2,7 @@ import 'package:adscriptum/buffer.dart';
 import 'package:args/args.dart';
 import 'package:flutter/material.dart';
 import 'package:adscriptum/config.dart' as Config;
+import 'package:flutter/rendering.dart';
 
 void main(final List<String> argv) {
   final argParser = ArgParser()
@@ -24,28 +25,43 @@ class ScriptPage extends StatefulWidget {
 }
 
 class _ScriptPageState extends State<ScriptPage> {
-  //currently this is just a single-buffer editor
-  //TODO: change that
-  Buffer _buffer = Buffer(['hello', 'this', 'is', 'a', 'test']);
+  //TODO: implement buffer switching
+  int _currentBuffer = 0;
+  List<Buffer> _buffers = [
+    Buffer('hello\nthis\nis\na\ntest'),
+  ];
+  TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: _buffers[_currentBuffer].buffer);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final buffer = <Widget>[];
-    for (final line in _buffer.buffer)
-      buffer.add(Text(
-        line,
+    //TODO: implement basic editing
+    return Scaffold(
+      backgroundColor: Color(Config.backgroundColor),
+      body: TextField(
+        autofocus: true,
+        maxLines: null,
+        controller: _controller,
+        cursorColor: Color(Config.foregroundColor),
+        autocorrect: false,
+        //TODO: switch between insert/normal mode
+        cursorWidth: 1,
+        decoration: null,
+        expands: true,
+        //TODO: make this switch between modes
+        readOnly: false,
         style: TextStyle(
           fontFamily: Config.fonts.first,
           fontFamilyFallback: Config.fonts,
           fontSize: Config.fontSize,
           color: Color(Config.foregroundColor),
+          decorationColor: Color(Config.foregroundColor),
         ),
-      ));
-    return Scaffold(
-      backgroundColor: Color(Config.backgroundColor),
-      body: Column(
-        children: buffer,
-        crossAxisAlignment: CrossAxisAlignment.start,
       ),
     );
   }
