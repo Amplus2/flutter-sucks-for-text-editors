@@ -12,15 +12,13 @@ void main(final List<String> argv) {
   final args = argParser.parse(argv);
   for (final option in args.options) {
     if (option == 'config')
-      Config.file = argParser.options['config'].getOrDefault('WTFHAPPENED');
+      Config.file = argParser.options['config']?.valueOrDefault('WTFHAPPENED');
     else if (option == 'command') ; //TODO: run command
   }
   runApp(MaterialApp(title: 'Adscriptum', home: ScriptPage()));
 }
 
 class ScriptPage extends StatefulWidget {
-  ScriptPage({Key key}) : super(key: key);
-
   @override
   _ScriptPageState createState() => _ScriptPageState();
 }
@@ -32,7 +30,7 @@ class _ScriptPageState extends State<ScriptPage> {
     Buffer('hello\nthis\nis\na\ntest'),
   ];
   Mode _mode = Mode.normal;
-  TextEditingController _controller;
+  late TextEditingController _controller;
 
   @override
   void initState() {
