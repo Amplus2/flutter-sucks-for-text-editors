@@ -8,10 +8,10 @@ int backgroundColor = 0xff202020;
 int foregroundColor = 0xffffffff;
 
 load() {
-  final lines = File(file).readAsLinesSync();
-  for (var i = 0; i < lines.length; i++)
-    lines[i] = lines[i].replaceFirst(RegExp(r'#.*$'), '').trim();
-  lines.removeWhere((element) => element.isEmpty);
+  final lines = File(file)
+      .readAsLinesSync()
+      .map((e) => e.replaceFirst(RegExp(r'#.*$'), '').trim())
+      .where((e) => e.isNotEmpty);
   print(lines);
   //TODO: parse remaining lines
 }

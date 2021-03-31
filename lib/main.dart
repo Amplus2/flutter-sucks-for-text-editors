@@ -1,7 +1,7 @@
 import 'package:adscriptum/buffer.dart';
 import 'package:adscriptum/mode.dart';
 import 'package:args/args.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:adscriptum/config.dart' as Config;
 import 'package:flutter/rendering.dart';
 
@@ -15,7 +15,7 @@ void main(final List<String> argv) {
       Config.file = argParser.options['config']?.valueOrDefault('WTFHAPPENED');
     else if (option == 'command') ; //TODO: run command
   }
-  runApp(MaterialApp(title: 'Adscriptum', home: ScriptPage()));
+  runApp(CupertinoApp(title: 'Adscriptum', home: ScriptPage()));
 }
 
 class ScriptPage extends StatefulWidget {
@@ -38,15 +38,17 @@ class _ScriptPageState extends State<ScriptPage> {
     _controller = TextEditingController(text: _buffers[_currentBuffer].buffer);
   }
 
+  void runExCommand(String cmd) {}
+
   @override
   Widget build(BuildContext context) {
     //TODO: implement basic editing
-    return Scaffold(
+    return CupertinoPageScaffold(
       backgroundColor: Color(Config.backgroundColor),
-      body: Expanded(
+      child: Expanded(
         child: Column(
           children: [
-            TextField(
+            CupertinoTextField(
               autofocus: true,
               maxLines: null,
               controller: _controller,
